@@ -1,17 +1,19 @@
 ## events
 
-you can push data from smart contract to outside consumers, such as a UI
+- event cannot be read from the smart contract itself. They can only be consumed from outside entities. Also, they cost less gas than storage variables.
+- you can push data from smart contract to outside consumers, such as a UI
 
 - first, declare your events on the contract level using the `event` keyword=>
 
 ```event NewTrade(
       uint date,
-      address from,
+      address indexed from,
       address to,
        uint amount
   )
 ```
 
+- `indexed` is used to filter the event according to the caller's liking. BUT, `indexed` are expensive. So, you can use maximum 3 indexes in a nevent.
 - then, you need to use the `emit` that event in a function
 
 ````function trade ( address _to, uint _amount) external{
